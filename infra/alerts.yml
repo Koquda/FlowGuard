@@ -1,0 +1,31 @@
+groups:
+  - name: flowguard
+    rules:
+      - alert: FlowGuardUnavailable
+        expr: up{job="flowguard"} == 0
+        for: 30s
+        labels:
+          severity: critical
+        annotations:
+          summary: FlowGuard API is unavailable
+      - alert: FlowGuardProcessorUnavailable
+        expr: flowguard_processor_available == 0
+        for: 30s
+        labels:
+          severity: warning
+        annotations:
+          summary: Simulated payment processor is unavailable
+      - alert: FlowGuardDeadLetters
+        expr: flowguard_dead_letter > 0
+        for: 30s
+        labels:
+          severity: warning
+        annotations:
+          summary: Payments need operator attention
+      - alert: FlowGuardQueueStalled
+        expr: flowguard_oldest_pending_age_seconds > 60
+        for: 30s
+        labels:
+          severity: warning
+        annotations:
+          summary: Payments have waited more than one minute

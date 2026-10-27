@@ -1,0 +1,8 @@
+ts	phase	decision	why	evidence	result
+2026-10-27T12:00:00Z	repository	Create public repository with MIT license	User requested repository first	https://github.com/Koquda/FlowGuard	created
+2026-10-27T12:01:00Z	design	Use a SQLite queue and separate processor ledger	Atomic enqueue avoids database and broker dual writes	docs/plan.md	implementation in progress
+2026-10-27T08:32:53.201113+00:00	audit	Correct earlier timestamps	The first two rows used placeholder times later than execution; this row supersedes their timestamps	docs/decisions.tsv	corrected
+2026-10-27T08:32:53.201113+00:00	verification	Verify real HTTP duplicate and lost response recovery	Prove It Works requires inspecting the processor evidence	scripts/smoke.py	16 concurrent requests and one charge passed
+2026-10-27T08:32:53.201113+00:00	ui	Verify desktop and mobile behavior	Apple design requires responsive feedback and accessible layout	docs/dashboard.png	lost response and duplicate flow passed; 375px no overflow
+2026-10-27T08:32:53.201113+00:00	infrastructure	Validate orchestration configuration	Docker engine is stopped and launch did not complete	compose.yaml	config passed; container execution not verified locally
+2026-10-27T08:33:24.812095+00:00	final-review	Accept final independent review and correct scenario wording	Permanent fault replay cannot claim recovery	docs/architecture-review.md	11 tests passed; one narration docstring removed; no correctness blocker
