@@ -13,4 +13,9 @@ jobs:
       - run: python -m unittest discover -s tests -v
       - run: python scripts/smoke.py
       - run: docker compose config --quiet
-      - run: docker build -t flowguard:test .
+      - run: docker compose up -d --build
+      - run: python scripts/verify_running.py
+      - if: failure()
+        run: docker compose logs
+      - if: always()
+        run: docker compose down
